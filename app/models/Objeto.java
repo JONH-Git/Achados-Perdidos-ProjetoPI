@@ -15,15 +15,15 @@ import java.util.Date;
 public class Objeto extends Model {
 
     @Required
-    @MinSize(value = 4, message = "O nome deve ter, no mínimo, 4 caracteres!")
+    @MinSize(value = 3, message = "O nome deve ter, no mínimo, 3 caracteres!")
     public String nome;
 
     @Required
-    @MinSize(value = 10, message = "A descrição deve ter, no mínimo, 10 caracteres!")
+    @MinSize(value = 4, message = "A descrição deve ter, no mínimo, 4 caracteres!")
     public String descricao;
 
     @Required
-    @MinSize(value = 10, message = "A descrição do loca ter, no mínimo, 10 caracteres!")
+    @MinSize(value = 4, message = "A descrição do local deve ter, no mínimo, 4 caracteres!")
     public String local;
 
     @InPast(message = "A data que o objeto foi encontrado deve estar no passado!")
