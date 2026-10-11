@@ -1,0 +1,45 @@
+#{extends 'main.html' /}
+#{set title:'Listagem de Pessoas' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/listagem.css'}">
+#{/set}
+
+<div class="list-container">
+    <div class="list-header">
+        <h2>👤 Usuários Cadastrados</h2>
+
+        <form action="@{Usuarios.listar()}" method="GET" class="filter-form">
+            <input type="text" name="filtro" placeholder="Filtrar por nome..." value="${filtro}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Turma</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            #{list items:usuarios, as:'usuario'}
+            <tr>
+                <td>${usuario.nome}</td>
+                <td>${usuario.email}</td>
+                <td>${usuario.turma}</td>
+                <td>${usuario.telefone}</td>
+                <td>
+                    <a href="@{Usuarios.editar(usuario.id)}" class="btn-action edit">Editar</a>
+                </td>
+                <td>
+                    <a href="@{Usuarios.remover(usuario.id)}" class="btn-action delete">remover</a>
+                </td>
+            </tr>
+            #{/list}
+        </tbody>
+    </table>
+</div>

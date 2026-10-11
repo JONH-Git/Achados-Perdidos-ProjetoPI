@@ -1,0 +1,87 @@
+#{extends 'main.html' /}
+#{set title:'Cadastro de Pessoa' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/form.css'}">
+#{/set}
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>👤 Cadastrar Pessoa</h2>
+
+        #{ifErrors}
+        <h3 class="error-message">Revise as informações do formulário!</h3>
+        #{/ifErrors}
+
+        #{else}
+        <p>Preencha os dados abaixo para registrar-se.</p>
+        #{/else}
+
+    </div>
+
+    <form action="@{Usuarios.salvar()}" method="POST" id="formUsuario">
+
+        <input type="hidden" name="usuario.id" value="${usuario?.id}">
+
+        <div class="form-group"> 
+            <label for="nome">Nome Completo:</label>
+            <span class="error-message">#{error 'usuario.nome' /}</span>
+            <input type="text" id="nome" name="usuario.nome" value="${usuario?.nome}" placeholder="Ex: José da Silva">
+        </div>
+
+        <div class="form-group">
+            <label for="email">E-mail (Institucional ou Pessoal):</label>
+            <span class="error-message">#{error 'usuario.email' /}</span>
+            <input type="email" id="email" name="usuario.email" value="${usuario?.email}"
+                placeholder="Ex: jose@academico.ifrn.edu.br">
+        </div>
+
+        <div class="form-group"> 
+            <label for="email">Senha:</label>
+            <span class="error-message">#{error 'usuario.senha' /}</span>
+            <input type="password" id="senha" name="usuario.senha" value="${usuario?.senha}">
+        </div>
+
+        <div class="form-group"> 
+            <label for="turma">Turma:</label>
+            <span class="error-message">#{error 'usuario.turma' /}</span>
+            <select id="turma" name="usuario.turma">
+                <option value="">Selecione a turma...</option>
+                <optgroup label="Informática (INFO)">
+                    <option value="INFO 1" ${usuario?.turma=='INFO 1' ? 'selected' : '' }>INFO 1</option>
+                    <option value="INFO 2" ${usuario?.turma=='INFO 2' ? 'selected' : '' }>INFO 2</option>
+                    <option value="INFO 3" ${usuario?.turma=='INFO 3' ? 'selected' : '' }>INFO 3</option>
+                    <option value="INFO 4" ${usuario?.turma=='INFO 4' ? 'selected' : '' }>INFO 4</option>
+                </optgroup>
+                <optgroup label="Administração (ADM)">
+                    <option value="ADM 1" ${usuario?.turma=='ADM 1' ? 'selected' : '' }>ADM 1</option>
+                    <option value="ADM 2" ${usuario?.turma=='ADM 2' ? 'selected' : '' }>ADM 2</option>
+                    <option value="ADM 3" ${usuario?.turma=='ADM 3' ? 'selected' : '' }>ADM 3</option>
+                    <option value="ADM 4" ${usuario?.turma=='ADM 4' ? 'selected' : '' }>ADM 4</option>
+                </optgroup>
+                <optgroup label="Eletrotécnica (ELETRO)">
+                    <option value="ELETRO 1" ${usuario?.turma=='ELETRO 1' ? 'selected' : '' }>ELETRO 1</option>
+                    <option value="ELETRO 2" ${usuario?.turma=='ELETRO 2' ? 'selected' : '' }>ELETRO 2</option>
+                    <option value="ELETRO 3" ${usuario?.turma=='ELETRO 3' ? 'selected' : '' }>ELETRO 3</option>
+                    <option value="ELETRO 4" ${usuario?.turma=='ELETRO 4' ? 'selected' : '' }>ELETRO 4</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <div class="form-group"> 
+            <label for="telefone">Telefone / WhatsApp:</label>
+            <span class="error-message">#{error 'usuario.telefone' /}</span>
+            <input type="text" id="telefone" name="usuario.telefone" value="${usuario?.telefone}"
+                placeholder="Ex: sem espaços, parênteses e traço: (84) 99999-9999">
+        </div>
+
+        <div class="form-actions"> 
+            <a href="@{Application.index()}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Salvar Cadastro</button>
+        </div>
+    </form>
+</div>
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/form-usuarios.js'}"></script>
+#{/set}

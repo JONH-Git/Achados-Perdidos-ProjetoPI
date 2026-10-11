@@ -1,0 +1,81 @@
+#{extends 'main.html' /}
+#{set title:'Objetos Perdidos/Achados' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/listagem.css'}">
+#{/set}
+
+<div class="list-container">
+    <div class="list-header">
+        <h2>📦 Objetos Registrados</h2>
+
+        <form action="@{Objetos.listar()}" method="GET" class="filter-form">
+            <input type="text" name="filtro" placeholder="Filtrar por objeto..." value="${filtro}">
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Objeto</th>
+                <th>Local</th>
+                <th>Data</th>
+                <th>Responsável</th>
+                <th>Descrição</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            #{list items:objetos, as:'objeto'}
+            <tr>
+                <td>${objeto.nome}</td>
+
+
+                <td class="desc-cell">
+                    <span class="truncated-text">
+                        ${objeto.local?.length() > 15 ? objeto.local.substring(0, 15) + '...' :
+                        objeto.local}
+                    </span>
+
+                    <div class="tooltip-box">
+                        ${objeto.local}
+                    </div>
+                </td>
+
+                <td>${objeto.dataAchado?.format('dd/MM/yyyy')}</td>
+
+                <td>${objeto.usuario?.nome}</td>
+
+                <td class="desc-cell">
+                    <span class="truncated-text">
+                        ${objeto.descricao?.length() > 15 ? objeto.descricao.substring(0, 15) + '...' :
+                        objeto.descricao}
+                    </span>
+
+                    <div class="tooltip-box">
+                        ${objeto.descricao}
+                    </div>
+                </td>
+
+                #{if (session.contains('usuarioId') &&  objeto.usuario?.id == Long.parseLong(session['usuarioId'])) || session.contains('ADM')}
+
+                #{if session.contains('ADM')}
+                <td>
+                    <a href="@{Objetos.devolver(objeto.id)}" class="btn-action return">Devolver</a>
+                </td>
+                #{/if}
+                
+                <td>
+                    <a href="@{Objetos.editar(objeto.id)}" class="btn-action edit">Editar</a>
+                </td>
+                <td>
+                    <a href="@{Objetos.remover(objeto.id)}" class="btn-action delete">Remover</a>
+                </td>
+
+                #{/if}
+            </tr>
+            #{/list}
+        </tbody>
+    </table>
+</div>

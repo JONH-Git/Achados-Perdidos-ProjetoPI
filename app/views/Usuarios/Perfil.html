@@ -1,0 +1,55 @@
+#{extends 'main.html' /}
+#{set title:'Perfil' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/perfil.css'}">
+#{/set}
+
+<div class="profile-container">
+    <div class="profile-card">
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"
+                    stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                </svg>
+            </div>
+            <h2>${usuario?.nome}</h2>
+            <p class="profile-role">
+                #{if usuario?.turma}
+                Aluno - ${usuario.turma}
+                #{/if}
+                #{else}
+                ADM
+                #{/else}
+            </p>
+        </div>
+
+        <div class="profile-details">
+
+            <div class="detail-group">
+                <span class="detail-label">ID do Sistema</span>
+                <span class="detail-value">#${usuario?.id}</span>
+            </div>
+            <div class="detail-group">
+                <span class="detail-label">E-mail</span>
+                <span class="detail-value">${usuario?.email}</span>
+            </div>
+            <div class="detail-group">
+                <span class="detail-label">Telefone</span>
+                <span class="detail-value">${usuario?.telefone ?: 'Não registado'}</span>
+            </div>
+
+        </div>
+
+        <div class="profile-actions">
+            <a href="@{Usuarios.editar(usuario.id)}" class="btn btn-primary btn-block">Editar Dados</a>
+
+            <form action="@{Usuarios.remover(usuario.id)}" method="POST" class="delete-form"
+                onsubmit="return confirm('Tem a certeza absoluta de que pretende eliminar a sua conta? Esta ação apagará o seu acesso e não pode ser revertida.');">
+                <button type="submit" class="btn btn-danger btn-block">Eliminar Conta</button>
+            </form>
+        </div>
+    </div>
+</div>

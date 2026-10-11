@@ -1,0 +1,35 @@
+#{extends 'main.html' /}
+#{set title:'Login' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/form.css'}">
+#{/set}
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>👤 Login</h2>
+        <p>Preencha os dados abaixo para logar.</p>
+    </div>
+
+    <form action="@{Login.logar()}" method="POST">
+
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Ex: jose@academico.ifrn.edu.br">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Senha:</label>
+            <input type="password" id="senha" name="senha">
+        </div>
+
+        <div class="form-actions">
+            <a href="@{Application.index()}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Logar</button>
+        </div>
+    </form>
+</div>
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/form-usuarios.js'}"></script>
+#{/set}

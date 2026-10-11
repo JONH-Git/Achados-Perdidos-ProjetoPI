@@ -1,0 +1,59 @@
+#{extends 'main.html' /}
+#{set title:'Cadastrar Objeto' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/form.css'}">
+#{/set}
+
+<div class="form-container">
+    <div class="form-header">
+        <h2>📦 Registrar Objeto</h2>
+
+        #{ifErrors}
+        <h3 class="error-message">Revise as informações do formulário!</h3>
+        #{/ifErrors}
+
+        #{else}
+        <p>Informe os detalhes do item encontrado.</p>
+        #{/else}
+    </div>
+
+    <form action="@{Objetos.salvar()}" method="POST" id="formObjeto">
+        <input type="hidden" name="objeto.id" value="${objeto?.id}">
+
+        <div class="form-group">
+            <label for="nome">Nome do Objeto:</label>
+            <span class="error-message">#{error 'objeto.nome' /}</span>
+            <input type="text" id="nome" name="objeto.nome" value="${objeto?.nome}" placeholder="Ex: Mochila preta">
+        </div>
+
+        <div class="form-group">
+            <label for="local">Local onde foi encontrado/perdido:</label>
+            <span class="error-message">#{error 'objeto.local' /}</span>
+            <input type="text" id="local" name="objeto.local" value="${objeto?.local}"
+                placeholder="Ex: Biblioteca, Bloco A...">
+        </div>
+
+        <div class="form-group">
+            <label for="dataAchado">Data do Ocorrido:</label>
+            <span class="error-message">#{error 'objeto.dataAchado' /}</span>
+            <input type="date" id="dataAchado" name="objeto.dataAchado"
+                value="${objeto?.dataAchado?.format('yyyy-MM-dd')}">
+        </div>
+
+        <div class="form-group">
+            <label for="descricao">Descrição:</label>
+            <span class="error-message">#{error 'objeto.descricao' /}</span>
+            <textarea id="descricao" name="objeto.descricao" rows="4">${objeto?.descricao}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <a href="@{Objetos.listar()}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Salvar Objeto</button>
+        </div>
+    </form>
+</div>
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/form-objetos.js'}"></script>
+#{/set}

@@ -1,0 +1,32 @@
+#{extends 'main.html' /}
+#{set title:'Início' /}
+
+#{set 'moreStyles'}
+<link rel="stylesheet" type="text/css" href="@{'/public/stylesheets/index.css'}">
+#{/set}
+
+<div class="hero-section">
+    <h1>Bem-vindo ao Achados&Perdidos</h1>
+    <p>Perdeu alguma coisa no campus? Ou encontrou algo que não é seu? Você está no lugar certo.</p>
+
+    <div class="hero-buttons">
+        <a href="@{Objetos.form()}" class="btn btn-primary">Registrar Objeto</a>
+        <a href="@{Objetos.listar()}" class="btn btn-secondary">Procurar Objetos</a>
+    </div>
+</div>
+
+<div class="info-section">
+    <div class="card">
+        <h3>🔍 Como funciona?</h3>
+        <p>Cadastre os objetos que você encontrou ou relate algo que perdeu. Nossa plataforma funciona como um mural
+            virtual para conectar quem achou com quem perdeu.</p>
+    </div>
+    <div class="card">
+        <h3>👤 Cadastrar-se</h3>
+        <p>Ainda não tem um cadastro no site? clique <a href="@{Usuarios.form()}">aqui</a> para se registrar!.</p>
+    </div>
+</div>
+
+#{set 'moreScripts'}
+<script src="@{'/public/javascripts/index.js'}"></script>
+#{/set}
